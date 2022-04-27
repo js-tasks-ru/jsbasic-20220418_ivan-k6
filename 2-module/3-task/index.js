@@ -4,8 +4,8 @@ let calculator = {
       console.log('Операнды должны быть числами');
       return null;
     }
-    calculator.a = a;
-    calculator.b = b;
+    this.a = a;
+    this.b = b;
   },
   sum: function() {return this.a + this.b},
   mul: function() {return this.a * this.b},
