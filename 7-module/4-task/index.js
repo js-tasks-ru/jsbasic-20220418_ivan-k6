@@ -38,11 +38,14 @@ export default class StepSlider {
     let sliderThumb = this.elem.querySelector('.slider__thumb');
     let sliderProgress = this.elem.querySelector('.slider__progress');
     let slider = this.elem;
+
+    sliderThumb.ondragstart = () => false;
+    sliderThumb.onpointerdown = () => false;
+    sliderThumb.onpointermove = () => false;
     
     setStepValue(value);
     setThumbPosition(value / (steps - 1) * 100);
     
-    sliderThumb.addEventListener('ondragstart', () => false);
     this.elem.addEventListener('click', selectClk);
 
     function selectClk(event) {
@@ -58,9 +61,9 @@ export default class StepSlider {
     }
 
 
-
     function setStepValue(value) {
-      if (sliderValue.textContent != value) {
+      console.log(sliderValue);
+      if (sliderValue.textContent !== value) {
         sliderValue.textContent = value;
         slider.dispatchEvent(new CustomEvent('slider-change', {detail: value, bubbles: true}));
       } 
@@ -78,8 +81,6 @@ export default class StepSlider {
       sliderThumb.style.left = `${valuePercents}%`;
       sliderProgress.style.width = `${valuePercents}%`;
     }
-
-
 
     
     sliderThumb.onpointerdown = function(event) {
